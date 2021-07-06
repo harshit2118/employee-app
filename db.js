@@ -7,14 +7,14 @@ let initialState=(client)=>{
             console.log("Table Dropped");
         }
     });
-    client.query("CREATE TABLE employees(id VARCHAR(255),name VARCHAR(255),gender VARCHAR(255),department VARCHAR(255),designation VARCHAR(255),salary INTEGER)",(err,result)=>{
+    client.query("CREATE TABLE employees(id INTEGER NOT NULL PRIMARY KEY,name VARCHAR(255),gender VARCHAR(255),department VARCHAR(255),designation VARCHAR(255),salary INTEGER)",(err,result)=>{
         if(err){
             throw err
         };
         console.log("Table Added!!!");
     });
     employeeList.forEach((x)=>{
-        let q1=`INSERT INTO employees VALUES ('${x.id}','${x.name}','${x.gender}','${x.department}','${x.designation}',${x.salary})`;
+        let q1=`INSERT INTO employees VALUES (${x.id},'${x.name}','${x.gender}','${x.department}','${x.designation}',${x.salary})`;
         client.query(q1,(err,result)=>{
             if(err)throw err;
             else{
